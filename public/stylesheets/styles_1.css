@@ -321,6 +321,13 @@ h1 a, h1 a:link, h1 a:visited {
 	color: #000;
 }
 
+.logo a:link, .logo a:visited {
+  color: #ff7800;
+  font-weight: bold !important;
+  font-family: "微軟正黑體", "Microsoft JhengHei", "標楷體", "DFKai-sb";
+  text-shadow: -2px 0 White, 0 2px White, 2px 0 White, 0 -2px White;
+}
+
 p {
 	line-height: 1.6;
 }
