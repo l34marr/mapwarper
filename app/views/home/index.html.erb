@@ -1,7 +1,7 @@
 <div id="container">
 
 <div id="left-col">
-<div id="video-intro"><h2>Overview</h2>
+<div id="video-intro"><h2>簡介</h2>
  Find maps and other imagery, upload, and rectify against a real map.<br />
  You can then download and use the rectified map in your mapping applications.<br />
  Just sign up and you can start uploading and get warping!
@@ -11,7 +11,7 @@
 </div>
 
 <div>
-<h2>What is it?</h2>
+<h2>系統介紹</h2>
 <p>It's a free to use, open source map warper / map georectifier, it's a bit unstable! This project is supported by <a href="http://entropyfree.com">Entropy Free</a> and the <a href="http://maps.nypl.org">New York Public Library</a>.
 </p><p>
 Note: This has been migrated from it's old home at <a href="warper.geothings.net">warper.geothings.net</a> .
@@ -57,7 +57,7 @@ Mail me at tim@geothings.net for more information!
 </div>
 
 <div id="map_list">
-  <h2><%= link_to 'Browse All Maps', maps_path %>
+  <h2><%= link_to '所有地圖', maps_path %>
   </h2>
 
   <% if @my_maps -%>
@@ -78,7 +78,7 @@ Mail me at tim@geothings.net for more information!
 
   <br/>
 
-  <h3>Last Rectified Maps</h3>
+  <h3>最近的校正地圖</h3>
 
   <table id="map_table" cellpadding="3">
       <thead>
@@ -98,7 +98,7 @@ Mail me at tim@geothings.net for more information!
 
 <div id="layer_list">
 
-  <h3>Recent Layers</h3>
+  <h3>最近新增的圖層</h3>
   <table id="layer_table" cellpadding="3">
     <thead>
       <tr>
