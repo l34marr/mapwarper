@@ -1,7 +1,7 @@
 # Settings specified here will take precedence over those in config/environment.rb
-SITE_URL = "local.mapwarper.net"
-SITE_NAME = "map warper"
-SITE_EMAIL = "robot@mapwarper.net"
+SITE_URL = "warper.rchss.sinica.edu.tw"
+SITE_NAME = "線上地圖校正系統"
+SITE_EMAIL = "marr.tw@gmail.com"
 MAPSERVER_URL = "/mapserv"  #url to the mapserv executable
 
 #paths to directories to put various files in
@@ -38,7 +38,7 @@ config.action_view.debug_rjs                         = true
 config.action_mailer.raise_delivery_errors = false
 
 #GDAL_PATH  = "/home/tim/bin/FWTools-2.0.6/bin_safe/"
-GDAL_PATH  = ""
+GDAL_PATH  = "/home/gis/FWTools-2.0.6/bin_safe/"
 GOOGLE_ANALYTICS_CODE = "UA-12240034-2"
 GOOGLE_ANALYTICS_COOKIE_PATH = "/warper-dev/"
 Yahoo_app_id = "lbQ2VNLV34EoEmxF9dguamWEFSXjI7adJ.ACHkdChT2JGmQ0Bj.jP1cF0nmh5XP3"
