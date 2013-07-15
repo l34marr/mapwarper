@@ -21,7 +21,7 @@ Mail me at tim@geothings.net for more information!
 </p>
 </div>
 <div id="tag-cloud">
-  <h4 class="smaller">Tags</h4>
+  <h4 class="smaller">標籤</h4>
   <% tag_cloud @tags, %w(css1 css2 css3 css4) do |tag, css_class| %>
     <%= link_to tag.name, { :controller=>:maps, :action => :tag, :id => tag.name }, :class => css_class %>
   <% end %>
@@ -61,19 +61,19 @@ Mail me at tim@geothings.net for more information!
   </h2>
 
   <% if @my_maps -%>
-    <h3>My Maps</h3>
+    <h3>我的地圖</h3>
     <table id="map_table" cellpadding="3">
     <thead>
         <tr>
-          <th>Map</th>
-          <th>Title</th>
-          <th>Last modified</th>
-          <th>Status</th>
+          <th>地圖</th>
+          <th>標題</th>
+          <th>編輯時間</th>
+          <th>說明</th>
         </tr>
       </thead>
         <%= render :partial => 'maps/map', :collection => @my_maps  unless @my_maps.nil? %>
     </table>
-    <%= link_to "See all of My Maps", my_maps_path(:user_id => current_user) -%>
+    <%= link_to "顯示我的所有地圖", my_maps_path(:user_id => current_user) -%>
   <%end -%>
 
   <br/>
@@ -92,7 +92,7 @@ Mail me at tim@geothings.net for more information!
     <%= render :partial => 'maps/map', :collection => @maps unless @maps.nil? %>
   </table>
 
-  <%= link_to 'See all Maps', maps_path %>
+  <%= link_to '顯示所有地圖', maps_path %>
 
 </div>
 
@@ -111,8 +111,8 @@ Mail me at tim@geothings.net for more information!
     </thead>
     <%= render :partial => 'layers/layer', :collection => @layers unless @layers.nil? %>
   </table>
-<%= link_to "View all Layers", layers_path %><br />
-<%= link_to "Create a new layer", new_layer_path %>
+<%= link_to "顯示所有圖集", layers_path %><br />
+<%= link_to "新增圖集", new_layer_path %>
 </div>
 
 </div>

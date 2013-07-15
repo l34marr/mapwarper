@@ -25,7 +25,7 @@ class AuditsController < ApplicationController
       :per_page => 20,
       :order => "created_at DESC",
       :conditions => ['user_id = ?', @user.id ])
-    @title = "Recent Activity for User " +@user.login.capitalize
+    @title = "帳號記錄 " +@user.login.capitalize
     render :action => 'index'
   end
 
