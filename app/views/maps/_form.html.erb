@@ -1,16 +1,16 @@
 <% form_for(@map, :html => {:multipart => true}) do |f| %>
   <div class="column span-12">
     <p>
-      <b>Title</b><br />
+      <b>標題</b><br />
       <%= f.text_field :title %>
     </p>
 
     <p>
-      <b>Description </b><span class="tiny-text">(max 256 chars)</span><br />
+      <b>描述 </b><span class="tiny-text">(最多 256 字元)</span><br />
       <%= f.text_area(:description, :rows => 12) %>
     </p>
     <p>
-      <b>Tags </b><span class="tiny-text">(comma separated)</span> <br />
+      <b>關鍵字 </b><span class="tiny-text">(以逗號隔開)</span> <br />
       <%= f.text_field :tag_list %>
     </p>
        <p>
@@ -88,7 +88,7 @@
   <div class="column span-24">
       <%- if defined?(page)  && page =~ /new/ -%>
       <p>
-        <label for="upload"><b>Upload An Image File:</b>
+        <label for="upload"><b>上傳圖檔 (檔名必須是英文、數字、底線組成，請不要上傳中文檔名的圖檔):</b>
           <br /><% if @max_size %>
             Max size:
             <%=  number_to_human_size @max_size %>.
@@ -101,8 +101,8 @@
 
 <%- if defined?(page)  && (page =~ /edit/ && logged_in? && (current_user == @map.owner || current_user.has_role?("editor")) || page =~ /new/ ) -%>
 <p>
-Map visibility. <br /><%= f.radio_button :public, "true" %><label for="map_public_true">Public(default)</label> <br/>
-<%= f.radio_button :public, "false" %><label for="map_public_false">Don't list the map (only you can see it)</label>
+地圖是否公開? <br /><%= f.radio_button :public, "true" %><label for="map_public_true">公開 (預設)</label> <br/>
+<%= f.radio_button :public, "false" %><label for="map_public_false">不公開 (只有上傳者能看到)</label>
 </p>
 <%- end -%>
     <p>
