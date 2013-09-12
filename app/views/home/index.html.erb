@@ -1,24 +1,24 @@
 <div id="container">
 
 <div id="left-col">
-<div id="video-intro"><h2>簡介</h2>
- Find maps and other imagery, upload, and rectify against a real map.<br />
- You can then download and use the rectified map in your mapping applications.<br />
- Just sign up and you can start uploading and get warping!
-  <h4>
-  <%= link_to "Upload Map!", new_map_path -%>
-  </h4>
+<div id="video-intro">
+<h2>簡介</h2>
+<p>中央研究院「地圖與遙測影像數位典藏計畫」累積豐富地理資訊數位典藏內容，藉由群眾外包 (Crowdsourcing) 精神，社會大眾可以自由上傳地圖或協助地圖進行地理座標定位 (Geo-referencing)，將地圖影像轉換成 GIS 圖層服務。透過這個平台，讓各式地圖得以相互套疊比對，並提供給各類型 GIS 應用系統介接使用。歡迎大家一起參與！共同建立地理資訊數位典藏加值應用基礎環境。</p>
 </div>
 
 <div>
 <h2>系統介紹</h2>
-<p>It's a free to use, open source map warper / map georectifier, it's a bit unstable! This project is supported by <a href="http://entropyfree.com">Entropy Free</a> and the <a href="http://maps.nypl.org">New York Public Library</a>.
-</p><p>
-Note: This has been migrated from it's old home at <a href="warper.geothings.net">warper.geothings.net</a> .
-It's now running much faster and previous limits about file sizes and image dimensions have been raised much higher!
-<br />
-Mail me at tim@geothings.net for more information!
-</p>
+<p>本「線上地圖校正」系統是使用紐約公共圖書館 (<a href="http://maps.nypl.org">New York Public Library</a>) 贊助之開放原始碼計畫所發展出來的「Map Warper」系統所建立，核心功能運用 Ruby and Rails 開發。一般使用者無須安裝任何軟體，透過瀏覽器就可以協助地圖校正或操作與地圖瀏覽及套疊功能。校正後地圖可以進一步匯出，在各式 GIS 軟體或 Google Map / Earth 上展示。</p>
+</div>
+
+<div>
+<h2>相關網站</h2>
+<dt><a href="http://maps.nypl.org/warper">NYPL Map Warper</a></dt>
+<dd>(<a href="http://maps.nypl.org/warper">http://maps.nypl.org/warper</a>)</dd>
+<dt><a href="http://mapwarper.net/">Map Warper</a></dt>
+<dd>(<a href="http://mapwarper.net/">http://mapwarper.net</a>)</dd>
+<dt><a href="http://www.georeferencer.org/">Georeferencer</a></dt>
+<dd>(<a href="http://www.georeferencer.org/">http://www.georeferencer.org/</a>)</dd>
 </div>
 <div id="tag-cloud">
   <h4 class="smaller">標籤</h4>
