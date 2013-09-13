@@ -13,22 +13,21 @@
 
 <div>
 <h2>相關網站</h2>
-<dt><a href="http://maps.nypl.org/warper">NYPL Map Warper</a></dt>
-<dd>(<a href="http://maps.nypl.org/warper">http://maps.nypl.org/warper</a>)</dd>
-<dt><a href="http://mapwarper.net/">Map Warper</a></dt>
-<dd>(<a href="http://mapwarper.net/">http://mapwarper.net</a>)</dd>
-<dt><a href="http://www.georeferencer.org/">Georeferencer</a></dt>
-<dd>(<a href="http://www.georeferencer.org/">http://www.georeferencer.org/</a>)</dd>
+<ul>
+<li><a href="http://maps.nypl.org/warper">NYPL Map Warper</a></li>
+<li><a href="http://mapwarper.net/">Map Warper</a></li>
+<li><a href="http://www.georeferencer.org/">Georeferencer</a></li>
+</ul>
 </div>
 <div id="tag-cloud">
-  <h4 class="smaller">標籤</h4>
+  <h4 class="smaller">標籤 (Tags)</h4>
   <% tag_cloud @tags, %w(css1 css2 css3 css4) do |tag, css_class| %>
     <%= link_to tag.name, { :controller=>:maps, :action => :tag, :id => tag.name }, :class => css_class %>
   <% end %>
 </div>
 <div id="news">
   
-<h4 class="smaller">News</h4>
+<h4 class="smaller">最新消息 (News)</h4>
 <% cache "news_feeds" do %>
 <table>
   <% @feeds.each do |feed| %>
