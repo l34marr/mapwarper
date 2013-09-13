@@ -1,26 +1,26 @@
 <div class="user_status">
   <% if logged_in? %>
-    Logged in as:
+    帳號:
     <%= link_to h(current_user.login.capitalize), user_path(current_user) %>
-    <%= link_to "My Maps", my_maps_path(current_user) %>
-    <%= link_to "My Activity", user_activity_path(current_user) %>
-    <%= link_to "Settings", edit_user_path(current_user) %>
-    <%= link_to "Log Out", logout_url %>
+    <%= link_to "我的地圖", my_maps_path(current_user) %>
+    <%= link_to "編輯記錄", user_activity_path(current_user) %>
+    <%= link_to "個人設定", edit_user_path(current_user) %>
+    <%= link_to "登出", logout_url %>
   <% else %>
-    <%= link_to "Sign In", new_session_path %>
-    <%= link_to "Create Account", new_user_path %>
+    <%= link_to "登入", new_session_path %>
+    <%= link_to "建立帳號", new_user_path %>
   <% end %>
   <% if logged_in? %>
     <% if current_user.has_role?("administrator") || current_user.has_role?("super user") %>
       <br />
-      <%= link_to "All Maps", maps_path %>
-      <%= link_to "All Layers", layers_path %>
-      <%= link_to "All Activity", activity_url %>
-      <%= link_to "All Comments", url_for(:controller => "comments", :action => "index") %>
-      <%= link_to "Groups", groups_path %>
-      <%= link_to "Imports", imports_path %>
-      <%= link_to "User Stats", url_for(:controller => "users", :action => "stats") %>
-      <%= link_to "Administer Users", users_path %>
+      <%= link_to "所有地圖", maps_path %>
+      <%= link_to "所有圖集", layers_path %>
+      <%= link_to "所有記錄", activity_url %>
+      <%= link_to "所有留言", url_for(:controller => "comments", :action => "index") %>
+      <%= link_to "群組", groups_path %>
+      <%= link_to "匯入", imports_path %>
+      <%= link_to "使用者統計", url_for(:controller => "users", :action => "stats") %>
+      <%= link_to "管理使用者", users_path %>
     <% end %>
   <% end %>
 </div>
