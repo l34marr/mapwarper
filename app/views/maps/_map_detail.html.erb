@@ -15,7 +15,7 @@
       <%=strip_brackets(h(map.description)) -%>
     </span>
     <span class="map_summary">
-      <%- if map.owner -%>Uploaded by <%= link_to(map.owner.login, user_path(map.owner)) -%>.<%-end-%>
+      <%- if map.owner -%>由 <%= link_to(map.owner.login, user_path(map.owner)) -%> 上傳<%-end-%>
       <%- if map.layers.count > 0 -%>
         (In <%=link_to(pluralize(map.layers.count, 'layer'), map_layers_path(map.id)) -%>)
       <%-  end -%>
@@ -24,12 +24,12 @@
           Depicts: <%= map.depicts_year -%>
         <% end -%>
       </span>
-      <% if !map.public? %><span class="publicprivate">(Not listed)</span><% end-%>
-      Last modified <%=h time_ago_in_words(map.last_changed) -%> ago.
+      <% if !map.public? %><span class="publicprivate">(未公開)</span><% end-%>
+      更新時間 <%=h time_ago_in_words(map.last_changed) -%> 前.
       <%if map.gcps.hard.size > 0 %>
         <%=pluralize(map.gcps.hard.size, "control point") -%>.
       <%else-%>
-        Unrectified.
+        尚未校正.
       <%end-%>
     </span>
       <br />
