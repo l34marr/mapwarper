@@ -136,7 +136,7 @@ class MapsController < ApplicationController
         [ extents[0], extents[1] ]
       ]
 
-      bbox_polygon = Polygon.from_coordinates([bbox_poly_ary]).as_ewkt
+      bbox_polygon = Polygon.from_coordinates([bbox_poly_ary], -1).as_ewkt
       if params[:operation] == "within"
         conditions = ["ST_Within(bbox_geom, ST_GeomFromText('#{bbox_polygon}'))"]
       else
@@ -164,7 +164,7 @@ class MapsController < ApplicationController
     end
 
     paginate_params = {
-      :select => "bbox, title, description, updated_at, id",
+      :select => "bbox, title, description, updated_at, id, date_depicted",
       :page => params[:page],
       :per_page => 20,
       :order => sort_geo + sort_clause + sort_nulls,
@@ -180,7 +180,7 @@ class MapsController < ApplicationController
         :per_page => @maps.per_page,
         :total_entries => @maps.total_entries,
         :total_pages => @maps.total_pages,
-        :items => @maps.to_a}.to_json , :callback => params[:callback]}
+        :items => @maps.to_a}.to_json(:methods => :depicts_year) , :callback => params[:callback]}
     end
   end
 
@@ -281,7 +281,7 @@ class MapsController < ApplicationController
         render :action => 'index.rjs'
       else
         respond_to do |format|
-          format.html{ render :layout =>'application' }  # index.html.erb
+        format.html{ render :layout =>'application' }  # index.html.erb
         format.xml  { render :xml => @maps.to_xml(:root => "maps", :except => [:content_type, :size, :bbox_geom, :uuid, :parent_uuid, :filename, :parent_id,  :map, :thumbnail, :rough_centroid]) {|xml|
         xml.tag!'stat', "ok"
         xml.tag!'total-entries', @maps.total_entries
@@ -293,7 +293,7 @@ class MapsController < ApplicationController
           :per_page => @maps.per_page,
           :total_entries => @maps.total_entries,
           :total_pages => @maps.total_pages,
-          :items => @maps.to_a}.to_json(:except => [:content_type, :size, :bbox_geom, :uuid, :parent_uuid, :filename, :parent_id,  :map, :thumbnail, :rough_centroid]) , :callback => params[:callback]
+          :items => @maps.to_a}.to_json(:except => [:content_type, :size, :bbox_geom, :uuid, :parent_uuid, :filename, :parent_id,  :map, :thumbnail, :rough_centroid], :methods => :depicts_year) , :callback => params[:callback]
         }
         end
       end
@@ -716,7 +716,7 @@ class MapsController < ApplicationController
         raster.dump = Mapscript::MS_TRUE
         raster.metadata.set('wcs_formats', 'GEOTIFF')
         raster.metadata.set('wms_title', @map.title)
-        raster.metadata.set('wms_srs', 'EPSG:4326 EPSG:4269 EPSG:900913')
+        raster.metadata.set('wms_srs', 'EPSG:4326 EPSG:3857 EPSG:4269 EPSG:900913')
         #raster.debug = Mapscript::MS_TRUE
         raster.setProcessingKey("CLOSE_CONNECTION", "ALWAYS")
 

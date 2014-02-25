@@ -1,17 +1,17 @@
 <div id="container">
 
 <div id="left-col">
-<div id="video-intro">
+<div id="video-intro" class="paraMargin">
 <h2>簡介</h2>
 <p>中央研究院「地圖與遙測影像數位典藏計畫」累積豐富地理資訊數位典藏內容，藉由群眾外包 (Crowdsourcing) 精神，社會大眾可以自由上傳地圖或協助地圖進行地理座標定位 (Geo-referencing)，將地圖影像轉換成 GIS 圖層服務。透過這個平台，讓各式地圖得以相互套疊比對，並提供給各類型 GIS 應用系統介接使用。歡迎大家一起參與！共同建立地理資訊數位典藏加值應用基礎環境。</p>
 </div>
 
-<div>
+<div class="paraMargin">
 <h2>系統介紹</h2>
 <p>本「線上地圖校正」系統是使用紐約公共圖書館 (<a href="http://maps.nypl.org">New York Public Library</a>) 贊助之開放原始碼計畫所發展出來的「Map Warper」系統所建立，核心功能運用 Ruby and Rails 開發。一般使用者無須安裝任何軟體，透過瀏覽器就可以協助地圖校正或操作與地圖瀏覽及套疊功能。校正後地圖可以進一步匯出，在各式 GIS 軟體或 Google Map / Earth 上展示。</p>
 </div>
 
-<div>
+<div class="paraMargin">
 <h2>相關網站</h2>
 <ul>
 <li><a href="http://maps.nypl.org/warper">NYPL Map Warper</a></li>
@@ -22,15 +22,18 @@
 <li><a href="http://warp.worldmap.harvard.edu/">WorldMap WARP</a></li>
 </ul>
 </div>
-<div id="tag-cloud">
-  <h4 class="smaller">標籤 (Tags)</h4>
+
+<div id="tag-cloud" class="paraMargin">
+  <h3>標籤 (Tags)</h3>
+  <p class="tagCloudLink">
   <% tag_cloud @tags, %w(css1 css2 css3 css4) do |tag, css_class| %>
     <%= link_to tag.name, { :controller=>:maps, :action => :tag, :id => tag.name }, :class => css_class %>
   <% end %>
+  </p>
 </div>
-<div id="news">
-  
-<h4 class="smaller">最新消息 (News)</h4>
+
+<div id="news" class="paraMargin">
+<h3>最新消息 (News)</h3>
 <% cache "news_feeds" do %>
 <ul>
   <% @feeds.each do |feed| %>
@@ -47,11 +50,14 @@
 <div id="right-col">
   <div id="search-form">
     <%= render :partial => 'shared/search' -%>
-</div>
+    <br/>
+    <p class="browseButtonBlock">OR
+      <%= link_to 'Browse All Maps', maps_path, :class => "buttonWarper" %>
+    </p>
+  </div>
 
 <div id="map_list">
-  <h2><%= link_to '所有地圖', maps_path %>
-  </h2>
+
 
   <% if @my_maps -%>
     <h3>我的地圖</h3>
@@ -85,7 +91,7 @@
     <%= render :partial => 'maps/map', :collection => @maps unless @maps.nil? %>
   </table>
 
-  <%= link_to '顯示所有地圖', maps_path %>
+  <%= link_to '顯示所有地圖', maps_path, :class => "buttonWarper" %>
 
 </div>
 
@@ -96,7 +102,7 @@
     <thead>
       <tr>
         <th>圖層</th>
-        <th width="45%">標題</th>
+        <th class="widthTh">標題</th>
         <th>年份</th>
         <th>地圖數量</th>
         <th>完成比例</th>
@@ -104,8 +110,8 @@
     </thead>
     <%= render :partial => 'layers/layer', :collection => @layers unless @layers.nil? %>
   </table>
-<%= link_to "顯示所有圖集", layers_path %><br />
-<%= link_to "新增圖集", new_layer_path %>
+<%= link_to "顯示所有圖集", layers_path, :class => "buttonWarper" %><br />
+<%= link_to "新增圖集", new_layer_path, :class => "buttonWarper" %>
 </div>
 
 </div>

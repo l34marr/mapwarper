@@ -4,6 +4,7 @@ require "matrix"
 require 'erb'
 require 'rexml/document'
 require 'nokogiri'
+require 'open-uri'
 include ErrorCalculator
 
 
@@ -40,17 +41,19 @@ class Map < ActiveRecord::Base
 
   named_scope :real_maps, :conditions => {:map_type => Map.map_type(:is_map)}
   attr_accessor :error
+  attr_accessor :upload_url
 
   validates_presence_of :title
   validates_numericality_of :rough_lat, :rough_lon, :rough_zoom, :allow_nil => true
   validates_numericality_of :metadata_lat, :metadata_lon, :allow_nil => true
-
+  
+  before_create :download_remote_image, :if => :upload_url_provided?
   before_create :save_dimensions
   after_create :setup_image
   after_destroy :delete_images
   after_destroy :delete_map, :update_counter_cache, :update_layers
   after_save :update_counter_cache
-
+  
   #############################################
   #CUSTOM VALIDATIONS
   #############################################
@@ -63,6 +66,38 @@ class Map < ActiveRecord::Base
   #############################################
   #FILTERS
   #############################################
+
+  def upload_url_provided?
+    !self.upload_url.blank?
+  end
+
+  def download_remote_image
+    img_upload = do_download_remote_image
+    unless img_upload
+      errors.add(:upload_url, "is invalid or inaccessible")
+      return false
+    end
+    self.upload = img_upload
+    self.source_uri = upload_url
+
+    if Map.find_by_upload_file_name(upload.original_filename)
+      errors.add(:filename, "is already being used")
+      return false
+    end
+    
+  end
+
+  def do_download_remote_image
+    begin
+      io = open(URI.parse(upload_url))
+      def io.original_filename; base_uri.path.split('/').last; end
+      io.original_filename.blank? ? nil : io
+    rescue => e
+      logger.debug "Error with URL upload"
+      logger.debug e
+      return false
+    end
+  end
 
   def save_dimensions
     if ["image/jpeg", "image/tiff", "image/png", "image/gif", "image/bmp"].include?(upload.content_type.to_s)
@@ -367,7 +402,7 @@ class Map < ActiveRecord::Base
   #returns a GeoRuby polygon object representing the bounds
   def bounds_polygon
     bounds_float  = bounds.split(',').collect {|i| i.to_f}
-    Polygon.from_coordinates([ [bounds_float[0..1]] , [bounds_float[2..3]] ])
+    Polygon.from_coordinates([ [bounds_float[0..1]] , [bounds_float[2..3]] ], -1)
   end
 
   def converted_bbox
@@ -673,7 +708,7 @@ class Map < ActiveRecord::Base
           [ extents[0], extents[3] ],
           [ extents[0], extents[1] ]
         ]
-        self.bbox_geom = Polygon.from_coordinates([poly_array])
+        self.bbox_geom = Polygon.from_coordinates([poly_array], -1)
         save
       rescue
       end
