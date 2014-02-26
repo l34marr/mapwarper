@@ -49,7 +49,7 @@ class Map < ActiveRecord::Base
   
   before_create :download_remote_image, :if => :upload_url_provided?
   before_create :save_dimensions
-  after_create :setup_image
+  after_create :setup_image, :get_mbtile_database
   after_destroy :delete_images
   after_destroy :delete_map, :update_counter_cache, :update_layers
   after_save :update_counter_cache
@@ -245,6 +245,22 @@ class Map < ActiveRecord::Base
     File.join(dest_dir, "/png/")
   end
 
+  ##################
+  #added the mbtiles
+  def warped_mbtiles_dir
+    File.join(dest_dir, "/mbtiles/")
+  end
+
+  def tiles_folder
+      File.join(warped_mbtiles_dir, "/tiles/") + id.to_s
+  end
+
+  def warped_tiles_mbtiles_database
+    File.join(warped_mbtiles_dir, id.to_s) + ".mbtiles"
+  end
+
+   ###################
+
   def warped_png
     unless File.exists?(warped_png_filename)
       convert_to_png
@@ -258,6 +274,24 @@ class Map < ActiveRecord::Base
 
   def warped_png_aux_xml
     warped_png + ".aux.xml"
+  end
+
+  def warped_mbtiles
+    unless File.exists?(warped_mbtiles_filename)
+      convert_to_tiles
+    end
+    warped_mbtiles_filename
+  end
+
+  def convert_tiles_into_mbtiles
+    f_bmtile_dir = File.join("/",id.to_s)
+  end
+
+
+
+
+  def warped_mbtiles_filename
+    filenamembtiles = File.join(warped_mbtiles_dir,id.to_s)
   end
 
   def public_warped_tif_url
@@ -606,6 +640,7 @@ class Map < ActiveRecord::Base
 
     dest_filename = self.warped_filename
     temp_filename = self.temp_filename
+    mbtiles_filename = self.warped_mbtiles_filename
 
     #delete existing temp images @map.delete_images
     if File.exists?(dest_filename)
@@ -680,6 +715,9 @@ class Map < ActiveRecord::Base
       end
          spawn do
            convert_to_png
+           convert_to_tiles
+           get_mbtile_database
+
          end
       self.touch(:rectified_at)
     else
@@ -799,6 +837,21 @@ class Map < ActiveRecord::Base
   #PRIVATE
   ############
 
+   def get_mbtile_database
+     logger.info "start convert to database ->  #{warped_tiles_mbtiles_database}"
+     new_variables = "#{GDAL_PATH}mb-util #{tiles_folder} #{warped_tiles_mbtiles_database}"
+     #gdal_translate -of mbtiles #{warped_filename}  #{warped_mbtiles_filename}
+     stdin, stdout, stderr = Open3::popen3(new_variables)
+     logger.debug new_variables
+     if stderr.readlines.to_s.size > 0
+       logger.error "ERROR convert png #{tiles_folder} -> #{warped_tiles_mbtiles_database}"
+       logger.error stderr.readlines.to_s
+       logger.error stdout.readlines.to_s
+     else
+       logger.info "end, converted to mbtile database -> #{warped_tiles_mbtiles_database}"
+     end
+   end
+
    def convert_to_png
      logger.info "start convert to png ->  #{warped_png_filename}"
      ext_command = "#{GDAL_PATH}gdal_translate -of png #{warped_filename} #{warped_png_filename}"
@@ -810,6 +863,23 @@ class Map < ActiveRecord::Base
        logger.error stdout.readlines.to_s
      else
        logger.info "end, converted to png -> #{warped_png_filename}"
+     end
+   end
+
+   def convert_to_tiles
+     logger.info "start convert to mbtiles ->  #{warped_png_filename}"
+     #gdal2tiles.py -p raster -s  EPSG:4326  -w google fcs.jpg
+     mbtiles_command = "#{GDAL_PATH}gdal2tiles.py -p raster -s EPSG:4326 -w google #{warped_png_filename} #{tiles_folder}" 
+
+     #gdal_translate -of mbtiles #{warped_filename}  #{warped_png_filename}
+     stdin, stdout, stderr = Open3::popen3(mbtiles_command)
+     logger.debug mbtiles_command
+     if stderr.readlines.to_s.size > 0
+       logger.error "ERROR convert mbtiles   #{warped_filename} -> #{warped_png_filename}"
+       logger.error stderr.readlines.to_s
+       logger.error stdout.readlines.to_s
+     else
+       logger.info "end, converted to mbtiles -> #{warped_mbtiles_filename}"
      end
    end
 

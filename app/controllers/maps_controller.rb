@@ -197,6 +197,7 @@ class MapsController < ApplicationController
       format.tif {  send_file @map.warped_filename, :x_sendfile => (RAILS_ENV != "development") }
       format.png  { send_file @map.warped_png, :x_sendfile => (RAILS_ENV != "development") }
       format.aux_xml { send_file @map.warped_png_aux_xml,:x_sendfile => (RAILS_ENV != "development") }
+      format.mbtiles { send_file @map.warped_tiles_mbtiles_database,:x_sendfile => (RAILS_ENV != "development") }
     end
   end
 

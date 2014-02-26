@@ -1,6 +1,9 @@
 <h2>Map</h2>
 <ul>
   <li>
+    MBTiles: <%= link_to  "Download rectified MBTiles", export_map_url(:id => @map, :format => :mbtiles) %>
+  </li>
+  <li>
     GeoTiff: <%= link_to  "Download rectified GeoTiff", export_map_url(:id => @map, :format => :tif) %>
   </li>
   <li>
