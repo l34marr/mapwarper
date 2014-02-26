@@ -241,6 +241,10 @@ class Map < ActiveRecord::Base
     File.join(warped_dir, id.to_s) + ".tif"
   end
 
+  def warped_merc_filename
+    File.join(warped_dir, id.to_s) + "_merc.tif"
+  end
+
   def warped_png_dir
     File.join(dest_dir, "/png/")
   end
@@ -869,7 +873,7 @@ class Map < ActiveRecord::Base
    def convert_to_tiles
      logger.info "start convert to mbtiles ->  #{warped_png_filename}"
      #gdal2tiles.py -p raster -s  EPSG:4326  -w google fcs.jpg
-     mbtiles_command = "#{GDAL_PATH}gdal2tiles.py -p raster -s EPSG:4326 -w google #{warped_png_filename} #{tiles_folder}" 
+     mbtiles_command = "gdalwarp -t_srs EPSG:3857 #{warped_filename} #{warped_merc_filename}; gdal2tiles.py #{warped_merc_filename} #{tiles_folder}" 
 
      #gdal_translate -of mbtiles #{warped_filename}  #{warped_png_filename}
      stdin, stdout, stderr = Open3::popen3(mbtiles_command)
