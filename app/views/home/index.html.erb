@@ -13,7 +13,7 @@
 
 <div class="paraMargin">
 <h2>相關網站</h2>
-<ul>
+<ul style="list-style: disc; padding-left: 20px">
 <li><a href="http://maps.nypl.org/warper">NYPL Map Warper</a></li>
 <li><a href="http://mapwarper.net/">Map Warper</a></li>
 <li><a href="http://www.georeferencer.org/">Georeferencer</a></li>
@@ -35,7 +35,7 @@
 <div id="news" class="paraMargin">
 <h3>最新消息 (News)</h3>
 <% cache "news_feeds" do %>
-<ul>
+<ul style="list-style: disc; padding-left: 20px">
   <% @feeds.each do |feed| %>
         <li>
           <%= link_to(feed[:title], feed[:link], :title => "click here to read this story", :target => "_blank") %>
@@ -51,8 +51,8 @@
   <div id="search-form">
     <%= render :partial => 'shared/search' -%>
     <br/>
-    <p class="browseButtonBlock">OR
-      <%= link_to 'Browse All Maps', maps_path, :class => "buttonWarper" %>
+    <p class="browseButtonBlock">或
+      <%= link_to '瀏覽所有地圖', maps_path, :class => "buttonWarper" %>
     </p>
   </div>
 
