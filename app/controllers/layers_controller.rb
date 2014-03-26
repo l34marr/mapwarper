@@ -67,7 +67,7 @@ class LayersController < ApplicationController
       [ extents[0], extents[1] ]
     ]
 
-    bbox_polygon = Polygon.from_coordinates([bbox_poly_ary], -1).as_ewkt
+    bbox_polygon = Polygon.from_coordinates([bbox_poly_ary], 4326).as_ewkt
     if params[:operation] == "within"
       conditions = ["ST_Within(bbox_geom, ST_GeomFromText('#{bbox_polygon}'))"]
     else

@@ -100,7 +100,10 @@ class MapsController < ApplicationController
     sort_init 'updated_at'
     sort_update
 
-    extents = [-74.1710,40.5883,-73.4809,40.8485] #NYC
+    #extents = [-74.1710,40.5883,-73.4809,40.8485] #NYC
+    #extents = [120.1718,23.4044,121.7401,25.0324] #Taichung
+    extents = [116.9742,20.8662,123.2474,27.3788] #Taiwan
+    #extents = [116.97420532043,20.866276563156,123.24739867956,27.378861214272] #Taiwan
 
     #TODO change to straight javascript call.
     if params[:place] && !params[:place].blank?
@@ -136,7 +139,7 @@ class MapsController < ApplicationController
         [ extents[0], extents[1] ]
       ]
 
-      bbox_polygon = Polygon.from_coordinates([bbox_poly_ary], -1).as_ewkt
+      bbox_polygon = Polygon.from_coordinates([bbox_poly_ary], 4326).as_ewkt
       if params[:operation] == "within"
         conditions = ["ST_Within(bbox_geom, ST_GeomFromText('#{bbox_polygon}'))"]
       else
