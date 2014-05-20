@@ -78,8 +78,7 @@ function init() {
     }
 
 
-    jpl_wms.setVisibility(false);
-    to_map.addLayer(jpl_wms);
+    to_map.addLayers([googleMaps,googleHybrid,googleSat]);
 
     if (map_has_bounds) {
       map_bounds_merc = new OpenLayers.Bounds();
