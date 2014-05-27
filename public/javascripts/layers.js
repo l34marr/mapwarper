@@ -73,6 +73,38 @@ function get_tgm_url (bounds) {
     }
 }
 
+//from yychen
+function get_som_url (bounds) {
+    var res = this.map.getResolution();
+    var x = Math.round ((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
+    var y = Math.round ((this.maxExtent.top - bounds.top) / (res * this.tileSize.h));
+    var z = this.map.getZoom();
+    var limit = Math.pow(2, z);
+
+    if (y < 0 || y >= limit) {
+        return OpenLayers.Util.getImagesLocation() + "404.png";
+    } else {
+        x = ((x % limit) + limit) % limit;
+        return this.url + z + "&TILECOL=" + x + "&TILEROW=" + y + "&FORMAT=image%2F" + this.type;
+    }
+}
+
+//from yychen
+function get_jinjian_url (bounds) {
+    var res = this.map.getResolution();
+    var x = Math.round ((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
+    var y = Math.round ((this.maxExtent.top - bounds.top) / (res * this.tileSize.h));
+    var z = this.map.getZoom();
+    var limit = Math.pow(2, z);
+
+    if (y < 0 || y >= limit) {
+        return OpenLayers.Util.getImagesLocation() + "404.png";
+    } else {
+        x = ((x % limit) + limit) % limit;
+        return this.url + z + "&TILECOL=" + x + "&TILEROW=" + y + "&FORMAT=image%2Fjpeg";
+    }
+}
+
 var osma = new OpenLayers.Layer.TMS(
     "Osmarender",
     ["http://a.tah.openstreetmap.org/Tiles/tile/", "http://b.tah.openstreetmap.org/Tiles/tile/", "http://c.tah.openstreetmap.org/Tiles/tile/"],
@@ -123,3 +155,18 @@ var tgmlayer = new OpenLayers.Layer.TMS("通用版電子地圖", "http://maps.nl
     /* attribution: '<a href="http://www.openstreetmap.org/">OpenStreetMap</a>'*/
 });
 
+var somlayer = new OpenLayers.Layer.TMS("正射影像", "http://maps.nlsc.gov.tw/S_Maps/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=PHOTO2&STYLE=_null&TILEMATRIXSET=EPSG%3A3857&TILEMATRIX=EPSG%3A3857%3A", {
+    type: 'png',
+    getURL: get_som_url,
+    displayOutsideMaxExtent: true,
+    transitionEffect: 'resize',
+    /* attribution: '<a href="http://www.openstreetmap.org/">OpenStreetMap</a>'*/
+});
+
+var jinjianlayer = new OpenLayers.Layer.TMS("經建版地形圖", "http://gis.sinica.edu.tw/tileserver/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=TM25K_2001&STYLE=_null&TILEMATRIXSET=GoogleMapsCompatible&TILEMATRIX=", {
+    type: 'jpg',
+    getURL: get_jinjian_url,
+    displayOutsideMaxExtent: true,
+    transitionEffect: 'resize',
+    /* attribution: '<a href="http://www.openstreetmap.org/">OpenStreetMap</a>'*/
+});
