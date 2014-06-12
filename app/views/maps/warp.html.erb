@@ -96,11 +96,11 @@
 
 <fieldset>
 
-<legend>Control Panel</legend>
+<legend>管理面板</legend>
 <div id="rectifyNotice">
 <span id="spinner" style="display:none;"><%= image_tag 'spinner.gif' %></span><span id="gcp_notice"></span>
 </div>
-<a href="#" id="controlPointLink">Control Points</a>
+<a href="#" id="controlPointLink">管理控制點</a>
 <div id = "div_gcp_form">
   <% form_for(:gcp, :html => {:id => 'gcp_form'} , :url => {:controller => 'map', :action=> 'rectify', :id => @map }) do |f| %>
     <div id="gcp_table_div" >
@@ -118,7 +118,7 @@
     </div>
 
     <input type="hidden" name="map" value ="<%= @map.id %>" />
-    <a href="#" id="advancedLink">Advanced options</a>
+    <a href="#" id="advancedLink">進階設定</a>
     <div id="advanced_form_options" >
       Rectify Method:
       <select name="transform_options">
