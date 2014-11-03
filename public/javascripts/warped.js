@@ -26,6 +26,7 @@ function warpedinit(){
     warpedmap = new OpenLayers.Map('warpedmap', options_warped);
     // create OSM layer
     mapnik3 = mapnik.clone();
+    warpedmap.addLayers([somlayer,tgmlayer,jinjianlayer]);
     warpedmap.addLayer(mapnik3);
 
     for (var i =0; i < layers_array.length;i++){
@@ -54,7 +55,7 @@ function warpedinit(){
    var gmr = new OpenLayers.Layer.Google("Google Streets", {'sphericalMercator': true});
    var gmh = new OpenLayers.Layer.Google("Google Hybrid", {type: G_HYBRID_MAP, 'sphericalMercator': true});
 
-   warpedmap.addLayers([gmr,gms,gmh,tgmlayer,somlayer,jinjianlayer]);
+   warpedmap.addLayers([gmr,gms,gmh]);
 
    clipmap_bounds_merc  = warped_bounds.transform(warpedmap.displayProjection, warpedmap.projection);
 

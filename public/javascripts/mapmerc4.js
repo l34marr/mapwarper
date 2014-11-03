@@ -70,6 +70,7 @@ function init() {
     warped_layer.setIsBaseLayer(false);
     to_map.addLayer(warped_layer);
 
+    to_map.addLayers([somlayer,tgmlayer,jinjianlayer]);
     to_map.addLayer(mapnik);
 
 
