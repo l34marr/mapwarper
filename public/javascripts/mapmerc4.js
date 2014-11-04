@@ -70,6 +70,7 @@ function init() {
     warped_layer.setIsBaseLayer(false);
     to_map.addLayer(warped_layer);
 
+    to_map.addLayers([googleMaps,googleHybrid,googleSat]);
     to_map.addLayers([somlayer,tgmlayer,jinjianlayer]);
     to_map.addLayer(mapnik);
 
@@ -78,8 +79,6 @@ function init() {
       to_map.addLayer(get_map_layer(layers_array[i]));
     }
 
-
-    to_map.addLayers([googleMaps,googleHybrid,googleSat]);
 
     if (map_has_bounds) {
       map_bounds_merc = new OpenLayers.Bounds();

@@ -135,7 +135,7 @@ var oamlayer = new OpenLayers.Layer.WMS( "OpenAerialMap",
 
 if(typeof(G_SATELLITE_MAP) !== 'undefined'){
   var googleSat = new OpenLayers.Layer.Google( "Google Satellite", {type: G_SATELLITE_MAP, 'sphericalMercator': true});
-  var googleMaps = new OpenLayers.Layer.Google( "Google Streets", { 'sphericalMercator': true});
+  var googleMaps = new OpenLayers.Layer.Google( "Google Map", { 'sphericalMercator': true});
   var googleHybrid = new OpenLayers.Layer.Google("Google Hybrid", {type: G_HYBRID_MAP, 'sphericalMercator': true});
 }
 
