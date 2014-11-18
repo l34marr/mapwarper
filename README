@@ -315,6 +315,7 @@ SITE_EMAIL
 GDAL_PATH
 
 $ cp config/initializers/session_store.example config/initializers/session_store.rb
+# check config/environment.rb
 $ cp config/database.example config/database.yml
 $ vi config/database.yml
 development:
