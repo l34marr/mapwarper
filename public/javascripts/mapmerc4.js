@@ -71,7 +71,7 @@ function init() {
     to_map.addLayer(warped_layer);
 
     to_map.addLayers([googleMaps,googleHybrid,googleSat]);
-    to_map.addLayers([somlayer,tgmlayer,jinjianlayer]);
+    to_map.addLayers([somlayer,tgmlayer,jinjianlayer,tdtlayer]);
     to_map.addLayer(mapnik);
 
 

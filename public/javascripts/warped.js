@@ -54,7 +54,7 @@ function warpedinit(){
    var gmh = new OpenLayers.Layer.Google("Google Hybrid", {type: G_HYBRID_MAP, 'sphericalMercator': true});
 
    warpedmap.addLayers([gmr,gms,gmh]);
-   warpedmap.addLayers([somlayer,tgmlayer,jinjianlayer]);
+   warpedmap.addLayers([somlayer,tgmlayer,jinjianlayer,tdtlayer]);
    warpedmap.addLayer(mapnik3);
 
    clipmap_bounds_merc  = warped_bounds.transform(warpedmap.displayProjection, warpedmap.projection);
