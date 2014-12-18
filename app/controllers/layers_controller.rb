@@ -157,7 +157,7 @@ end
       @page = "for_map"
     else
       @layers = Layer.paginate(paginate_params)
-      @html_title = "Browse Layer List"
+      @html_title = "圖集列表"
     end
     
     if request.xhr?
