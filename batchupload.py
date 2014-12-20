@@ -1,7 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
-rows = [('1', '3026', '3523', '32011176') , ('2', '3103', '4608', '42933940')]
+import csv
+
+with open('myfile.csv', 'rb') as f:
+    rows = list(csv.reader(f, delimiter=','))
+
+#rows = [
+#('1', '3026', '3523', '32011176'),
+#('2', '3103', '4608', '42933940'),
+#('3', '3154', '4574', '43279536'),
+#('4', '3079', '4588', '42379704'),
+#('5', '3106', '4580', '42676788')]
 
 part1 = """--
 -- PostgreSQL database dump
@@ -9416,11 +9426,11 @@ COPY audits (id, auditable_id, auditable_type, user_id, user_type, username, act
 
 def part2():
     result = ""
-    for i in [1, 2]:
+    for i in range(1, len(rows)+1):
         fn = str(i).zfill(5)
-        ln1 = '%s\t%s\tMap\t1\tUser\tsuper\tupdate\t--- \\ntitle: !str \\n  str: %s\\n  "@_rails_html_safe": false\\ndescription: !binary |\\n  5ris6Kmm\\n\\ncached_tag_list: ""\\nmap_type: 1\\nsubject_area: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nunique_id: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nsource_uri: !str \\n  str: ""\\n  "@_rails_html_safe": false\\ncall_number: !str \\n  str: ""\\n  "@_rails_html_safe": false\\npublisher: !str \\n  str: ""\\n  "@_rails_html_safe": false\\npublication_place: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nauthors: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nscale: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nmetadata_projection: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nrough_state: 123041\\nstatus: 2\\nmask_status: 123009\\nwidth: %s\\nheight: %s\\nupload_file_name: %s.tif\\nupload_file_size: %s\\nupload_content_type: image/tiff\\nowner_id: 1\\n	1	2014-10-28 15:07:01.36802\n' % (str(3*(i-1)+1), str(i), fn, rows[i-1][1], rows[i-1][2], fn, rows[i-1][3])
+        ln1 = '%s\t%s\tMap\t1\tUser\tsuper\tupdate\t--- \\ntitle: !str \\n  str: %s\\n  "@_rails_html_safe": false\\ndescription: !binary |\\n  5ris6Kmm\\n\\ncached_tag_list: ""\\nmap_type: 1\\nsubject_area: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nunique_id: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nsource_uri: !str \\n  str: ""\\n  "@_rails_html_safe": false\\ncall_number: !str \\n  str: ""\\n  "@_rails_html_safe": false\\npublisher: !str \\n  str: ""\\n  "@_rails_html_safe": false\\npublication_place: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nauthors: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nscale: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nmetadata_projection: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nrough_state: 123041\\nstatus: 2\\nmask_status: 123009\\nwidth: %s\\nheight: %s\\nupload_file_name: %s.tif\\nupload_file_size: %s\\nupload_content_type: image/tiff\\nowner_id: 1\\n	1	2014-10-28 15:07:01.36802\n' % (str(3*(i-1)+1), str(i), rows[i-1][4], rows[i-1][13], rows[i-1][14], fn, rows[i-1][17])
         ln2 = '%s	%s	Map	1	User	super	update	--- \\nrough_state: 0\\n	2	2014-10-28 15:07:02.567478\n' % (str(3*(i-1)+2), str(i))
-        ln3 = '%s	%s	Map	1	User	super	create	--- \\ntitle: !str \\n  str: %s\\n  "@_rails_html_safe": false\\ndescription: !binary |\\n  5ris6Kmm\\n\\ncached_tag_list: ""\\nmap_type: 1\\nsubject_area: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nunique_id: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nsource_uri: !str \\n  str: ""\\n  "@_rails_html_safe": false\\ncall_number: !str \\n  str: ""\\n  "@_rails_html_safe": false\\npublisher: !str \\n  str: ""\\n  "@_rails_html_safe": false\\npublication_place: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nauthors: !str \\n  str: ""\\n  "@_rails_html_safe": false\\ndate_depicted: !str \\n  str: ""\\n  "@_rails_html_safe": false\\npublished_date: \\nreprint_date: \\nscale: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nmetadata_projection: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nmetadata_lat: \\nmetadata_lon: \\nrough_centroid: \\nrough_lat: \\nrough_lon: \\nrough_zoom: \\nrough_state: 0\\nstatus: 2\\nmask_status: 123009\\nbbox: \\nbbox_geom: \\ndownloadable: true\\nwidth: %s\\nheight: %s\\nimport_id: \\npublic: true\\nupload_file_name: %s.tif\\nupload_file_size: %s\\nupload_content_type: image/tiff\\nupload_file_updated_at: \\ngcp_touched_at: \\nowner_id: 1\\nrectified_at: \\n	3	2014-10-28 15:07:02.637219\n' % (str(3*(i-1)+3), str(i), fn, rows[i-1][1], rows[i-1][2], fn, rows[i-1][3])
+        ln3 = '%s	%s	Map	1	User	super	create	--- \\ntitle: !str \\n  str: %s\\n  "@_rails_html_safe": false\\ndescription: !binary |\\n  5ris6Kmm\\n\\ncached_tag_list: ""\\nmap_type: 1\\nsubject_area: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nunique_id: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nsource_uri: !str \\n  str: ""\\n  "@_rails_html_safe": false\\ncall_number: !str \\n  str: ""\\n  "@_rails_html_safe": false\\npublisher: !str \\n  str: ""\\n  "@_rails_html_safe": false\\npublication_place: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nauthors: !str \\n  str: ""\\n  "@_rails_html_safe": false\\ndate_depicted: !str \\n  str: ""\\n  "@_rails_html_safe": false\\npublished_date: \\nreprint_date: \\nscale: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nmetadata_projection: !str \\n  str: ""\\n  "@_rails_html_safe": false\\nmetadata_lat: \\nmetadata_lon: \\nrough_centroid: \\nrough_lat: \\nrough_lon: \\nrough_zoom: \\nrough_state: 0\\nstatus: 2\\nmask_status: 123009\\nbbox: \\nbbox_geom: \\ndownloadable: true\\nwidth: %s\\nheight: %s\\nimport_id: \\npublic: true\\nupload_file_name: %s.tif\\nupload_file_size: %s\\nupload_content_type: image/tiff\\nupload_file_updated_at: \\ngcp_touched_at: \\nowner_id: 1\\nrectified_at: \\n	3	2014-10-28 15:07:02.637219\n' % (str(3*(i-1)+3), str(i), rows[i-1][4], rows[i-1][13], rows[i-1][14], fn, rows[i-1][17])
         result = result + ln1 + ln2 + ln3
     return result
 
@@ -9559,16 +9569,25 @@ SELECT pg_catalog.setval('layers_maps_id_seq', 1, false);
 --
 
 COPY maps (id, title, description, filename, width, height, status, mask_status, created_at, updated_at, upload_file_name, upload_content_type, upload_file_size, upload_file_updated_at, bbox, publisher, authors, scale, published_date, reprint_date, owner_id, public, downloadable, cached_tag_list, map_type, source_uri, bbox_geom, rough_lat, rough_lon, rough_centroid, rough_zoom, rough_state, import_id, publication_place, subject_area, unique_id, metadata_projection, metadata_lat, metadata_lon, date_depicted, call_number, rectified_at, gcp_touched_at) FROM stdin;
-1	00001	測試	00001.tif	3026	3523	2	123009	2014-10-27 07:48:13.915588	2014-10-27 07:48:14.163339	00001.tif	image/tiff	32011176	\N	\N				\N	\N	1	t	t		1		\N	\N	\N	\N	\N	0	\N					\N	\N			\N	\N
-2	00002	測試	00002.tif	3103	4608	2	121865	2014-10-28 04:15:53.705151	2014-10-28 04:15:53.930015	00002.tif	image/tiff	264543	\N	\N				\N	\N	1	t	t		1		\N	\N	\N	\N	\N	0	\N					\N	\N			\N	\N
-\.
+""" % (str(3*len(rows)))
+
+def part4():
+    result = ""
+    for i in range(1, len(rows)+1):
+        fn = str(i).zfill(5)
+        ln = """%s	%s	%s	%s	%s	%s	2	123009	2014-10-27 07:48:13.915588	2014-10-27 07:48:14.163339	%s	image/tiff	%s	\N	\N				\N	\N	1	t	t		1		\N	\N	\N	\N	\N	0	\N					\N	\N			\N	\N
+""" % (str(i), rows[i-1][4], rows[i-1][7], fn+'.tif', rows[i-1][13], rows[i-1][14], fn+'.tif', rows[i-1][17])
+        result = result + ln
+    return result
+
+part5 = """\.
 
 
 --
 -- Name: maps_id_seq; Type: SEQUENCE SET; Schema: public; Owner: marr
 --
 
-SELECT pg_catalog.setval('maps_id_seq', 2, true);
+SELECT pg_catalog.setval('maps_id_seq', %s, true);
 
 
 --
@@ -9591,16 +9610,23 @@ SELECT pg_catalog.setval('memberships_id_seq', 1, false);
 --
 
 COPY my_maps (id, map_id, user_id, created_at, updated_at) FROM stdin;
-1	1	1	2014-10-27 07:48:13.934949	2014-10-27 07:48:13.934949
-2	2	1	2014-10-28 04:15:53.715532	2014-10-28 04:15:53.715532
-\.
+""" % (str(len(rows)))
+
+def part6():
+    result = ""
+    for i in range(1, len(rows)+1):
+        ln = '%s	%s	1	2014-10-27 07:48:13.934949	2014-10-27 07:48:13.934949\n' % (str(i), str(i))
+        result = result + ln
+    return result
+
+part7 = """\.
 
 
 --
 -- Name: my_maps_id_seq; Type: SEQUENCE SET; Schema: public; Owner: marr
 --
 
-SELECT pg_catalog.setval('my_maps_id_seq', 2, true);
+SELECT pg_catalog.setval('my_maps_id_seq', %s, true);
 
 
 --
@@ -14045,6 +14071,6 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-""" % (str(3*len([1,2])))
+""" % (str(len(rows)))
 
-print part1 + part2() + part3
+print part1 + part2() + part3 + part4() + part5 + part6() + part7
