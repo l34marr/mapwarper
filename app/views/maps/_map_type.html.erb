@@ -1,22 +1,22 @@
-<% map_type_url = url_for(:controller => "maps", :action=> "map_type", :id => @map.id) -%>
-<%if @layer %> <%#only change the map list for layer views %>
-    <% form_remote_tag(:url => map_type_url, 
-                       :html => {:class=>"map-type-form"},
-                    :before => "jQuery('#loading-spinner').show()",
-                     :after => "jQuery('#map_table_div').fadeOut('slow')",
-                     :complete => "jQuery('#map_table_div').fadeIn('slow'); jQuery('#loading-spinner').hide() ",
-                     :failure => "alert('Whoops, there was an error ' + request.status + '!')"  
-                    ) do  -%>
+<script type="text/javascript">
+  <% form_id = "map_type_form#{@map.id}" %>
+  jQuery(document).ready(function () {
+    jQuery('form#<%=form_id%>').bind("ajax:complete", function (event, data, status, xhr) {
+        alert(data.responseText);
+    });
+  });
+</script>
+<%if @layer %> 
+  <%# need to change the map list for layer views %>
+  <%= form_tag(map_type_map_url(@map.id), :remote => true, :id=>form_id, :class=>"map-type-form") do  -%>
+    <%= select("map", :map_type, Map.map_type_hash, {}, :onchange => "jQuery('form##{form_id}').submit();") -%>
+    <input type="hidden" name="layerid" value="<%=@layer.id%>" />
+  <% end -%>
 
-      <%= select("map", :map_type, Map.map_type_hash, {},:onchange => "this.form.onsubmit()") -%>
-      <input type="hidden" name="layerid" value="<%=@layer.id%>" />
-    <% end -%>
-  <% else-%>
-    <% form_remote_tag(:url => map_type_url,
-                       :html => {:class=>"map-type-form"},
-                       :failure => "alert('Whoops, there was an error ' + request.status + '!')"  
-                       )  do  -%>
-    <%= select("map", :map_type, Map.map_type_hash, {},:onchange => "this.form.onsubmit()") -%>
+<% else-%>
+
+  <%= form_tag(map_type_map_url(@map.id), :remote => true, :id=>form_id,  :class=>"map-type-form") do %>
+    <%= select("map", :map_type, Map.map_type_hash, {},:onchange => "jQuery('form##{form_id }').submit();") -%>
   <% end -%>
 
 <% end -%>

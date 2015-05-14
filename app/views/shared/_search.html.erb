@@ -1,13 +1,13 @@
-<% form_tag url_for(:controller => "maps"), :id=>"searchform",:name=> "searchform", :method => :get do -%>
+<%= form_tag url_for(:controller => "maps"), :id=>"searchform",:name=> "searchform", :method => :get do -%>
   搜尋  
- <select id="field" name="field">
+  <select id="field" name="field">
     <%= options_for_select([ ["標題", "title"], 
-                           ["描述", "description"], 
-                           ["出版者", "publisher"],
-                           ["作者", "authors"],
-                            ["標籤", "tags"]], @field)-%>
-    </select>
-  關鍵字 
+        ["描述", "description"], 
+        ["出版者", "publisher"],
+        ["作者", "authors"],
+        ["標籤", "tags"]], @field)-%>
+  </select>
+  關鍵字
   <%= text_field_tag 'query', @query -%>
   <input type="submit" value=" 搜尋 ">
   <% if @show_warped == "1" -%>
@@ -24,3 +24,5 @@
   <%= radio_button_tag('show_warped', 1, check_rectified, :id => 'rectified_maps') %>
 
 <% end -%>
+  <br />
+  New: <%= link_to 'Find Rectified Maps by Location',  url_for(:controller => 'maps', :action=>'geosearch'), :class => "buttonWarper" %>
