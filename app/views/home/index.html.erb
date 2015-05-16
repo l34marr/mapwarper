@@ -60,123 +60,60 @@
 
 
       <% if @my_maps -%>
-        <h3>My Maps</h3>
+        <h3>我的地圖</h3>
         <table id="map_table" cellpadding="3">
           <thead>
             <tr>
-              <th>Map</th>
-              <th>Title</th>
-              <th>Last modified</th>
-              <th>Status</th>
+              <th>地圖</th>
+              <th>標題</th>
+              <th>編輯時間</th>
+              <th>說明</th>
             </tr>
           </thead>
           <%= render :partial => 'maps/map', :collection => @my_maps  unless @my_maps.nil? %>
         </table>
-        <%= link_to "See all of My Maps", my_maps_path(:user_id => current_user), :class => "buttonWarper" -%>
+        <%= link_to "顯示我的所有地圖", my_maps_path(:user_id => current_user), :class => "buttonWarper" -%>
       <%end -%>
 
       <br/>
 
-      <h3>Last Rectified Maps</h3>
+      <h3>最近校正的地圖</h3>
 
       <table id="map_table" cellpadding="3">
         <thead>
           <tr>
-            <th>Map</th>
-            <th>Title</th>
-            <th>Last modified</th>
-            <th>Status</th>
+            <th>地圖</th>
+            <th>標題</th>
+            <th>編輯時間</th>
+            <th>說明</th>
           </tr>
         </thead>
         <%= render :partial => 'maps/map', :collection => @maps unless @maps.nil? %>
       </table>
 
-      <%= link_to 'See all Maps', maps_path, :class => "buttonWarper" %>
+      <%= link_to '顯示所有地圖', maps_path, :class => "buttonWarper" %>
 
     </div>
 
     <div id="layer_list">
 
-      <h3>Recent Mosaics</h3>
+      <h3>最近新增的圖集</h3>
       <table id="layer_table" cellpadding="3">
         <thead>
           <tr>
-            <th>Mosaic</th>
-            <th class="widthTh">Title</th>
-            <th>Year</th>
-            <th>Number of Maps</th>
-            <th>Percentage Complete</th>
+            <th>圖集</th>
+            <th class="widthTh">標題</th>
+            <th>年份</th>
+            <th>地圖數量</th>
+            <th>完成比率</th>
           </tr>
         </thead>
         <%= render :partial => 'layers/layer', :collection => @layers unless @layers.nil? %>
       </table>
-      <%= link_to "View all Mosaics", layers_path, :class => "buttonWarper" %><br />
-      <%= link_to "Create a new mosaic", new_layer_path, :class => "buttonWarper" %>
+      <%= link_to "顯示所有圖集", layers_path, :class => "buttonWarper" %><br />
+      <%= link_to "新增圖集", new_layer_path, :class => "buttonWarper" %>
     </div>
 
-<<<<<<< HEAD
-<div id="map_list">
-
-
-  <% if @my_maps -%>
-    <h3>我的地圖</h3>
-    <table id="map_table" cellpadding="3">
-    <thead>
-        <tr>
-          <th>地圖</th>
-          <th>標題</th>
-          <th>編輯時間</th>
-          <th>說明</th>
-        </tr>
-      </thead>
-        <%= render :partial => 'maps/map', :collection => @my_maps  unless @my_maps.nil? %>
-    </table>
-    <%= link_to "顯示我的所有地圖", my_maps_path(:user_id => current_user) -%>
-  <%end -%>
-
-  <br/>
-
-  <h3>最近校正的地圖</h3>
-
-  <table id="map_table" cellpadding="3">
-      <thead>
-        <tr>
-          <th>地圖</th>
-          <th>標題</th>
-          <th>編輯時間</th>
-          <th>說明</th>
-        </tr>
-      </thead>
-    <%= render :partial => 'maps/map', :collection => @maps unless @maps.nil? %>
-  </table>
-
-  <%= link_to '顯示所有地圖', maps_path, :class => "buttonWarper" %>
-
-</div>
-
-<div id="layer_list">
-
-  <h3>最近新增的圖層</h3>
-  <table id="layer_table" cellpadding="3">
-    <thead>
-      <tr>
-        <th>圖層</th>
-        <th class="widthTh">標題</th>
-        <th>年份</th>
-        <th>地圖數量</th>
-        <th>完成比例</th>
-      </tr>
-    </thead>
-    <%= render :partial => 'layers/layer', :collection => @layers unless @layers.nil? %>
-  </table>
-<%= link_to "顯示所有圖集", layers_path, :class => "buttonWarper" %><br />
-<%= link_to "新增圖集", new_layer_path, :class => "buttonWarper" %>
-</div>
-
-</div>
-<div class="clear"></div>
-=======
   </div>
   <div class="clear"></div>
->>>>>>> upstream/master
 </div>
