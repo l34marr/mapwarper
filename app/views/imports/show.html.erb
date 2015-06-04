@@ -1,4 +1,4 @@
-<%= link_to "&lt; Browse imports", imports_path %>
+<%= link_to "&lt; Browse imports".html_safe, imports_path %>
 
 <h2>Import: <%=h @import.name %></h2>
 <p>Created: <%= @import.created_at.to_s(:long) %> by <%= link_to(( h @import.user.login), user_path(@import.user.id), :method => :get)  -%></p>
@@ -18,10 +18,10 @@
 <p><b>Default map authors </b><br />
   <%= @import.map_author %>
 </p>
-<p><b>Layer ID to add imported maps into existing layer. -99 to create new layer, blank for no layer </b><br />
+<p><b>Layer/Mosaic ID to add imported maps into existing layer. -99 to create new layer, blank for no layer </b><br />
   <%= @import.layer_id %>
 </p>
-<p><b>Layer title if one needs to be created</b><br />
+<p><b>Layer/Mosaic title if one needs to be created</b><br />
   <%= @import.layer_title %>
 </p>
 <p><b>Assigned user to own these</b><br />
@@ -31,10 +31,10 @@
 <br />
 <% if admin_authorized? %>
   <%=link_to('Edit this import', edit_import_path(@import)) %><br /><br />
-  <%=  link_to 'Delete this import. (Does not delete maps)', {:controller=>"imports", :action =>"destroy", :id => @import},  :method => :delete, :confirm => "Are you sure?" %>
+  <%=  link_to 'Delete this import. (Does not delete maps)', {:controller=>"imports", :action =>"destroy", :id => @import},  :method => :delete, :data => {:confirm => "Are you sure?"} %>
   <br /> <br />
   <% if @import.state =="ready" %>
-    <b><%=link_to('START IMPORT', start_import_path(@import), :confirm => "Ready to Start this import?") %></b>
+    <b><%=link_to('START IMPORT', start_import_path(@import), :data => {:confirm => "Ready to Start this import?"} ) %></b>
   <% else %>
     <%=link_to('Edit Maps', maps_import_path(@import)) %>
   <% end %>

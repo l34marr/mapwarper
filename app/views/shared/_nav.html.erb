@@ -1,13 +1,11 @@
 <div id="nav">
   <ul id="navlist">
-    <li><%= link_to_unless_current("首頁", :controller => 'home', :action=>'index') { "<span>首頁</span>" } %></li>
-    <li><%= link_to_unless((current_page?(maps_url) && !current_page?(maps_url(:show_warped =>1))),"所有地圖", maps_url) { "<span>所有地圖</span>" } %></li>
-    <li><%= link_to_unless_current("上傳地圖", new_map_path) { "<span>上傳地圖</span>" } %></li>
-    <li><%= link_to_unless_current("所有圖集",  layers_path) { "<span>所有圖集</span>" } %></li>
-    <li><%= link_to_unless_current("新增圖集", new_layer_path) { "<span>新增圖集</span>" } %></li>
-    <li><%= link_to_unless_current("查詢地圖", :controller => 'maps', :action => 'geosearch') { "<span>查詢地圖</span>" } %></li>
-    <li><%= link_to_unless_current("查詢圖集", :controller => 'layers', :action => 'geosearch') { "<span>查詢圖集</span>" } %></li>
-    <li><%= link_to_unless_current("關於", :controller => 'home', :action => 'about') { "<span>關於</span>" } %></li>
-    <li><%= link_to_unless_current("說明", :controller => 'home', :action => 'help') { "<span>說明</span>" } %></li>
+    <li><%= link_to_unless_current("首頁", root_path) { "<span>首頁</span>".html_safe } %></li>
+    <li><%= link_to_unless((current_page?(maps_url) && !current_page?(maps_url(:show_warped =>1))),"所有地圖", maps_url) { "<span>所有地圖</span>".html_safe } %></li>
+    <li><%= link_to_unless_current("上傳地圖", new_map_path) { "<span>上傳地圖</span>".html_safe } %></li>
+    <li><%= link_to_unless_current("所有圖集",  layers_path) { "<span>所有圖集</span>".html_safe } %></li>
+    <li><%= link_to_unless_current("新增圖集", new_layer_path) { "<span>新增圖集</span>".html_safe } %></li>
+    <li><%= link_to_unless_current("關於", about_path) { "<span>關於</span>".html_safe } %></li>
+    <li><%= link_to_unless_current("說明", help_path) { "<span>說明</span>".html_safe } %></li>
   </ul>
 </div>
